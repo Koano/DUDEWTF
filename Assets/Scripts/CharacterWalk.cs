@@ -5,11 +5,11 @@ public class CharacterWalk : MonoBehaviour
 {
 
     //Movement
-    public float moveSpeed = 10;
-    public float moveValue;
+    private float moveValue = 10f;
+    public float moveSpeed;
     public float flightmoveSpeed;
-    public float sprintSpeed = 1;
-    public float sprintValue = 1.5f;
+    private float sprintSpeed = 1;
+    public float sprintValue = 2f;
     //Jump
     public float jumppower;
     public Rigidbody player;
@@ -23,18 +23,18 @@ public class CharacterWalk : MonoBehaviour
 
         float h = Input.GetAxis("Horizontal");
 
-        moveValue = moveSpeed * sprintSpeed;
+        moveSpeed = moveValue * sprintSpeed;
        
         // Bewegung
 
 
         if (grounded == true)
         {
-            transform.Translate(new Vector3(h, 0, 0) * Time.deltaTime * moveValue);
+            transform.Translate(new Vector3(h, 0, 0) * Time.deltaTime * moveSpeed);
         }
         if  (grounded == false)
         {
-            transform.Translate(new Vector3(h, 0, 0) * Time.deltaTime * moveValue * flightmoveSpeed );
+            transform.Translate(new Vector3(h, 0, 0) * Time.deltaTime * moveSpeed * flightmoveSpeed );
         }
 
         if (Input.GetButtonDown("Jump") && grounded == true)
@@ -43,7 +43,6 @@ public class CharacterWalk : MonoBehaviour
             grounded = false;
         }
         if (Input.GetButton("Fire3"))
-
         {
             sprintSpeed = sprintValue;
         }
